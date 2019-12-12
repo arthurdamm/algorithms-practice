@@ -8,11 +8,8 @@ def rainwater(arr=[]):
     for i in range(len(arr)):
         maxLeftPeaks[i] = maxPeak
         # if is peak and larger than previous max peak, replace
-        if (i == 0 or arr[i] >= arr[i - 1]) and \
-           (i == len(arr) - 1 or arr[i] > arr[i + 1]) and \
-           arr[i] > maxPeak:
-           maxPeak = arr[i]
-           #print("maxPeak is now:", maxPeak)
+        if arr[i] > maxPeak:
+            maxPeak = arr[i]
 
     # Prepare second pass from right-to-left
     maxPeak = 0
@@ -26,11 +23,8 @@ def rainwater(arr=[]):
         if level > arr[i]:
             water += level - arr[i]
         # if is peak and larger than previous max peak, replace
-        if (i == len(arr) - 1 or arr[i] >= arr[i + 1]) and \
-           (i == 0 or arr[i] > arr[i - 1]) and \
-           arr[i] > maxPeak:
-           maxPeak = arr[i]
-           #print("maxPeak is now:", maxPeak)
+        if arr[i] > maxPeak:
+            maxPeak = arr[i]
 
     return water
 

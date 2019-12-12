@@ -3,38 +3,39 @@
 
 def rainwater(arr=[]):
     # Prepare first pass from left-to-right
-    largestLeftPeak = 0
-    leftPeaks = [0 for x in arr]
+    maxPeak = 0
+    maxLeftPeaks = [0] * len(arr)
     for i in range(len(arr)):
-        leftPeaks[i] = largestLeftPeak
+        maxLeftPeaks[i] = maxPeak
         # if is peak and larger than previous max peak, replace
-        if (i == 0 or arr[i] >= arr[i - 1]) and\
-           (i == len(arr) - 1 or arr[i] > arr[i + 1]) and\
-           arr[i] > largestLeftPeak:
-           largestLeftPeak = arr[i]
-           #print("largestLeftPeak is now:", largestLeftPeak)
+        if (i == 0 or arr[i] >= arr[i - 1]) and \
+           (i == len(arr) - 1 or arr[i] > arr[i + 1]) and \
+           arr[i] > maxPeak:
+           maxPeak = arr[i]
+           #print("maxPeak is now:", maxPeak)
 
     # Prepare second pass from right-to-left
-    largestRightPeak = 0
-    rightPeaks = [0 for x in arr]
+    maxPeak = 0
+    maxRightPeaks = [0] * len(arr)
     water = 0
     for i in range(len(arr) - 1, -1, -1):
-        rightPeaks[i] = largestRightPeak
+        maxRightPeaks[i] = maxPeak
         # calculate water level
-        level = min(leftPeaks[i], rightPeaks[i])
+        level = min(maxLeftPeaks[i], maxRightPeaks[i])
+        # if level is above current node, it holds water
         if level > arr[i]:
             water += level - arr[i]
         # if is peak and larger than previous max peak, replace
-        if (i == len(arr) - 1 or arr[i] >= arr[i + 1]) and\
+        if (i == len(arr) - 1 or arr[i] >= arr[i + 1]) and \
            (i == 0 or arr[i] > arr[i - 1]) and \
-           arr[i] > largestRightPeak:
-           largestRightPeak = arr[i]
-           #print("largestRightPeak is now:", largestRightPeak)
+           arr[i] > maxPeak:
+           maxPeak = arr[i]
+           #print("maxPeak is now:", maxPeak)
 
     return water
 
 if __name__ == "__main__":
-    arr = [0, 5, 0, 0, 0, 4, 0, 0, 0, 5, 1]
+    arr = [2, 5, 0, 0, 0, 1, 0, 0, 0, 5, 1]
     print("Rainwater of ", arr, "is", rainwater(arr))
     arr = [0, 1, 2, 1, 0, 1, 3, 2, 1, 2, 1]
     print("Rainwater of ", arr, "is", rainwater(arr))

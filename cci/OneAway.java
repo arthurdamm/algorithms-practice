@@ -23,16 +23,16 @@ public class OneAway {
         return nAway(str1, i, str2, j, 1);
     }
 
-    public static boolean nAway(char[] str1, int i, char[] str2, int j, int dist) {
+    public static boolean nAway(char[] str1, int i, char[] str2, int j, int n) {
         for (; i < str1.length && j < str2.length; i++, j++) {
             if (str1[i] == str2[j])
                 continue;
-            if (dist > 0)
-                return nAway(str1, i + 1, str2, j, dist - 1) ||
-                       nAway(str1, i, str2, j + 1, dist - 1) ||
-                       nAway(str1, i + 1, str2, j + 1, dist - 1);
+            if (n > 0)
+                return nAway(str1, i + 1, str2, j, n - 1) ||
+                       nAway(str1, i, str2, j + 1, n - 1) ||
+                       nAway(str1, i + 1, str2, j + 1, n - 1);
             return false;
         }
-        return str1.length - i <= dist && str2.length - j <= dist;
+        return str1.length - i <= n && str2.length - j <= n;
     }
 }

@@ -3,8 +3,6 @@
  * away/different from str2
  */
 
-import java.util.*;
-
 public class OneAway {
     public static void main(String[] args) {
         if (args.length >= 2)

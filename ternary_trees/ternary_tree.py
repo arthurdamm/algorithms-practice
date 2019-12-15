@@ -63,7 +63,7 @@ def num(arg):
     return ord(arg) if type(arg) == str else arg
 
 if __name__ == "__main__":
-    words = ["cute", "cup", "at", "as", "he", "us", "i"]
+    words = ["cute", "cup", "at", "as", "he", "us", "i", "cut"]
     mispelled_words = ["cut", "cups", "a", "eh", "bus", "hi"]
     root = None
     for word in words:
@@ -72,8 +72,12 @@ if __name__ == "__main__":
     traverse(root)
     for word in words:
         print("True Search: {}: {}".format(word, search(root, word)))
+    print()
     for word in mispelled_words:
         print("False Search: {}: {}".format(word, search(root, word)))
+
     for word in mispelled_words:
         print("Near Neighbor Search: {}".format(word))
         nearNeighborSearch(root, word, 1)
+
+

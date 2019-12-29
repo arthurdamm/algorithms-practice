@@ -18,15 +18,15 @@ var pathSum = function(root, sum) {
         if (!node) return;
         path.push(node.val);
         if (!node.left && !node.right && node.val == goal) {
-            ret.push(path);
-            return;
+            ret.push(path.slice());
         }
-        if (node.left) dfs(node.left, [...path], goal - node.val);
-        if (node.right) dfs(node.right, [...path], goal - node.val);
+        x = dfs(node.left, path, goal - node.val);
+        y= dfs(node.right, path, goal - node.val);
+        
+        path.pop();
     }
     dfs(root, [], sum);
     return ret;
     
 };
-
 

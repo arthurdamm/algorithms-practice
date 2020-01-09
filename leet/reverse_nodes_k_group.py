@@ -1,15 +1,13 @@
 # LeetCode 25. Reverse Nodes in k-Group
 
 # Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-from typing import List
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
 class Solution:
-    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+    def reverseKGroup(self, head, k: int):
         if not head: return None
         curr = head
         size = 0
@@ -17,20 +15,16 @@ class Solution:
         while curr:
             curr = curr.next
             size += 1
-
         curr = head
-        ret_head = None
-        prev_tail = None
-        new_tail = None
+        ret_head, prev_tail, new_tail = None, None, None
         for i in range(size // k):  # How many groups
             new_head, new_tail, curr = self.reverseK(curr, k)
             if not ret_head: ret_head = new_head
             if prev_tail: prev_tail.next = new_head
             prev_tail = new_tail
-        if size % k != 0 and new_tail: new_tail.next = curr
+        if new_tail: new_tail.next = curr
         return ret_head if ret_head else head
-            
-        
+
     def reverseK(self, head, k):
         new_tail = curr = head
         prev = None
@@ -41,4 +35,4 @@ class Solution:
             prev = curr
             curr = next
         return (prev, new_tail, curr)
- 
+

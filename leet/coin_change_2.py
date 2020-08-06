@@ -31,7 +31,7 @@ class BottomUpSolution:
         	for c in coins:
         		if c > i:
         			break
-        		if dp[i - c] > -1:
+        		if dp[i - c] < float('inf'):
         			dp[i] = min(1 + dp[i - c], dp[i])
         return dp[amount] if dp[amount] < float('inf') else -1
 

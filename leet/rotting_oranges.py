@@ -34,7 +34,7 @@ class Solution:
             if not new_rotting_tuples:
                 minutes = -1
                 break
-            rotting_tuples = new_rotting_tuples[:]
+            rotting_tuples = new_rotting_tuples
             new_rotting_tuples = []
         return minutes
 

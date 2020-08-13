@@ -1,7 +1,7 @@
 # The practice of common computer scientific & interview algorithms
 ## From LeetCode, HackerRank, and Holberton School
 
-![LeetCode](https://github.com/arthurdamm/algorithms-practice/blob/master/img/leetcode_logo.jpeg)
+![LeetCode](https://github.com/arthurdamm/algorithms-practice/blob/master/img/leetcode_screenshot.png)
 
 ## AUTHOR
 - [Arthur Damm](https://github.com/arthurdamm/twodoor) ~ [LinkedIn](https://www.linkedin.com/in/arthur-damm-96527042/) ~ [@arthurdamm](https://twitter.com/arthurdamm):

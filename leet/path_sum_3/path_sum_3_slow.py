@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# O(n^2) time complexity, O(1) space
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):

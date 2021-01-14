@@ -38,3 +38,19 @@ class Solution:
             elif currSum > x:
                 break
         return -1 if minOps == float('inf') else minOps
+
+
+# O(n) time O(n) space using a Prefix Sum dictionary in reverse
+class Solution:
+    def minOperations(self, nums: List[int], x: int) -> int:
+        from itertools import accumulate
+        prefixSums, maxArr = list(accumulate(nums)), float('-inf')
+        target = prefixSums[-1] - x
+        if target <= 0:
+            return len(nums) if target == 0 else -1
+        prefixSums = {prefixSums[i]: i for i in range(len(prefixSums))}
+        prefixSums[0] = -1
+        for prefixSum, index in prefixSums.items():
+            if prefixSum - target in prefixSums:
+                maxArr = max(maxArr, index - prefixSums[prefixSum - target])
+        return -1 if maxArr == float('-inf') else len(nums) - maxArr

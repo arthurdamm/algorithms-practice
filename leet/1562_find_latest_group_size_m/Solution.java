@@ -20,3 +20,21 @@ class Solution {
         return -1;
     }
 }
+
+// O(n) time, O(n) space
+class SolutionMapIntervals {
+    public int findLatestStep(int[] arr, int m) {
+        int lens[] = new int[arr.length + 1], sets[] = new int[arr.length + 2], ret = -1;
+        for (int i = 0; i < arr.length; i++) {
+            int left = sets[arr[i] - 1], right = sets[arr[i] + 1];
+            int len = left + right + 1;
+            sets[arr[i] + right] = sets[arr[i] - left] = len;
+            lens[len]++;
+            lens[left]--;
+            lens[right]--;
+            if (lens[m] > 0)
+                ret = i + 1;
+        }
+        return ret;
+    }
+}

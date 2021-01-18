@@ -1,5 +1,5 @@
 # LeetCode 1481. Least Number of Unique Integers after K Removals
-# https:#leetcode.com/problems/least-number-of-unique-integers-after-k-removals/
+# https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/
 # O(nlogm) time, O(n + m) space
 class Solution:
     def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:

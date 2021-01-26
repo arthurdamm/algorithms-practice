@@ -18,3 +18,32 @@ class Solution:
                     if visited[i + di][j + dj] > tempMax:
                         heapq.heappush(heap, (tempMax, (i + di, j + dj)))
         return float('inf')
+
+# O(nlogk) O(n) Binary Search for k
+class SolutionBinarySeach:
+    def minimumEffortPath(self, heights: List[List[int]]) -> int:
+        self.heights = heights
+        lo, hi = 0, int(1e6 + 1) 
+        while lo < hi:
+            mid = lo + (hi - lo) // 2
+            if self.kPossible(mid):
+                hi = mid
+            else:
+                lo = mid + 1
+        return lo
+
+    def kPossible(self, k):
+        m, n = len(self.heights), len(self.heights[0])
+        visited = [[False] * n for _ in range(m)]
+        def dfs(i, j):
+            if i == m - 1 and j == n - 1:
+                return True
+            visited[i][j] = True
+            for ddi, ddj in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+                di, dj = i + ddi, j + ddj
+                if 0 <= di < m and 0 <= dj < n and not visited[di][dj] and \
+                    abs(self.heights[i][j] - self.heights[di][dj]) <= k:
+                    if dfs(di, dj):
+                        return True
+            return False
+        return dfs(0, 0)

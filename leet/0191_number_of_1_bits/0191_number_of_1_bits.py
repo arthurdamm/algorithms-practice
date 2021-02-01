@@ -1,6 +1,6 @@
-# LeetCode 907. Sum of Subarray Minimums
-# https://leetcode.com/problems/sum-of-subarray-minimums/
-# O(n) time-and-space
+# LeetCode 191. Number of 1 Bits
+# https://leetcode.com/problems/number-of-1-bits/
+# O(logn) time, O(1) space
 class Solution:
     def hammingWeight(self, n: int) -> int:
         weight = 0

@@ -3,30 +3,30 @@
 // O(n*m*k) time-and-space
 function shortestPath(grid: number[][], k: number): number {
     let m = grid.length, n = grid[0].length;
+    if (k >= m + n - 2)
+        return m + n - 2;
     const dirs = [[0, 1], [1, 0], [0, -1], [-1, 0]];
-    const queue = [[0, 0, k, 0]];
-    const visited = new Array(m).fill(0).map(a => new Array(n).fill(0).map(a => new Array()));
-    let x = 0;
+    const queue = [[0, 0, 0]];
+    const visited = new Array(m).fill(0).map(a => new Array(n).fill(Number.MAX_SAFE_INTEGER));
+    let x = 0, steps = 0;
     while (x < queue.length) {
         for (let sz = queue.length; x < sz; x++) {
-            let [i, j, k, s] = queue[x];
-            if (visited[i][j][k])
-                continue;
-            visited[i][j][k] = true;
+            let [i, j, _k] = queue[x];
             if (i == m - 1 && j == n - 1)
-                return s;
+                return steps;
             for (let [ddi, ddj] of dirs) {
                 let di = i + ddi, dj = j + ddj;
                 if (di >= 0 && di < m && dj >= 0 && dj < n) {
-                    if (grid[di][dj] == 1) {
-                        if (k && !visited[di][dj][k - 1])
-                            queue.push([di, dj, k - 1, s + 1])
-                    } else if (!visited[di][dj][k])
-                        queue.push([di, dj, k, s + 1]);
+                    let nextK = grid[di][dj] + _k;
+                    if (nextK <= k && visited[di][dj] > nextK) {
+                        visited[di][dj] = nextK;
+                        queue.push([di, dj, nextK]);
+                    }
                 }
             }
             
         }
+        steps++;
     }
     return -1;
 };

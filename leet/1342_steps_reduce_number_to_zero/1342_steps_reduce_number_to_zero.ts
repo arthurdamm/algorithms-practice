@@ -7,3 +7,9 @@ function numberOfSteps (num: number): number {
         num & 1 ? num-- : num /= 2;
     return steps;
 };
+
+function numberOfStepsClever (num: number): number {
+    let steps = num ? 0 : 1;
+    for (; num > 0; (steps += (num & 1) + 1), num >>= 1) ;
+    return steps - 1;
+};

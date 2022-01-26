@@ -1,43 +1,29 @@
-"""
-1305. All Elements in Two Binary Search Trees
-O(N + M) time, O(N + M) space
-
-Given two binary search trees root1 and root2.
-
-Return a list containing all the integers from both trees sorted in ascending order.
-"""
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+# LeetCode 1305. All Elements in Two Binary Search Trees
+# https://leetcode.com/problems/all-elements-in-two-binary-search-trees/
+# O(n + m) time-and-space
 class Solution:
     def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
-        def bst2list(root, ret):
-            if not root: return
-            bst2list(root.left, ret)
-            ret.append(root.val)
-            bst2list(root.right, ret)
-            
-        list1 = []
-        bst2list(root1, list1)
-        list2 = []
-        bst2list(root2, list2)
+        def inOrderArray(root: TreeNode, arr: List[int]):
+            if root:
+                inOrderArray(root.left, arr)
+                arr.append(root.val)
+                inOrderArray(root.right, arr)
+            return arr
         
-        i, j = 0, 0
-        list3 = []
-        while i < len(list1) and j < len(list2):
-            if list1[i] < list2[j]:
-                list3.append(list1[i])
-                i += 1
+        def mergeSortedArrays(arr1: List[int], arr2: List[int]) -> List[int]:
+            i, j, res = 0, 0, []
+            while i < len(arr1) and j < len(arr2):
+                if arr1[i] < arr2[j]:
+                    res.append(arr1[i])
+                    i += 1
+                else:
+                    res.append(arr2[j])
+                    j += 1
+            if i < len(arr1):
+                res += arr1[i:]
             else:
-                list3.append(list2[j])
-                j += 1
-        while i < len(list1):
-            list3.append(list1[i])
-            i += 1
-        while j < len(list2):
-            list3.append(list2[j])
-            j += 1
-        return list3
+                res += arr2[j:]
+            return res
+        
+        return mergeSortedArrays(inOrderArray(root1, []), inOrderArray(root2, []))
+    

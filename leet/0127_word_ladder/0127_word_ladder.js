@@ -1,6 +1,6 @@
 /*
 LeetCode https://leetcode.com/problems/word-ladder/
-O(w*l) time, w=words l=length of word, O(w) space
+O(w*l^2) time, w=words l=length of word, O(w*l) space
 Key Insight: BFS graph problem, words different by 1 char are neighbors
 */
 var ladderLength = function(beginWord, endWord, wordList) {
@@ -23,20 +23,14 @@ var ladderLength = function(beginWord, endWord, wordList) {
 
 function findNeighbors(word, wordSet) {
     const neighbors = [];
-    const splitWord = word.split("");
-    for (let i = 0; i < splitWord.length; i++) {
-        const saveChar = splitWord[i];
+    for (let i = 0; i < word.length; i++) {
         for (const c of "abcdefghijklmnopqrstuvwxyz") {
-            if (c === saveChar)
-                continue;
-            splitWord[i] = c;
-            const nextWord = splitWord.join('');
+            const nextWord = word.slice(0, i) + c + word.slice(i + 1);
             if (wordSet.has(nextWord)) {
                 wordSet.delete(nextWord);
                 neighbors.push(nextWord);
             }
         }
-        splitWord[i] = saveChar;
     }
     return neighbors;
 }
